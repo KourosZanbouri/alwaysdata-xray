@@ -56,17 +56,12 @@ EOF
 }
 
 get_latest_version() {
-    # Get latest release version number
-    RELEASE_LATEST="$(curl -IkLs -o ${TMP_DIRECTORY}/NUL -w %{url_effective} https://github.com/XTLS/Xray-core/releases/latest | grep -o "[^/]*$")"
-    RELEASE_LATEST="v${RELEASE_LATEST#v}"
-    if [ -z "$RELEASE_LATEST" ]; then
-        echo "error: Failed to get the latest release version, please check your network."
-        exit 1
-    fi
+    # Set the release version number
+    RELEASE_VERSION="v1.8.0"
 }
 
 download_xray() {
-    DOWNLOAD_LINK="https://github.com/XTLS/Xray-core/releases/download/$RELEASE_LATEST/Xray-linux-64.zip"
+    DOWNLOAD_LINK="https://github.com/XTLS/Xray-core/releases/download/v1.8.0/Xray-linux-64.zip"
     if ! wget -qO "$ZIP_FILE" "$DOWNLOAD_LINK"; then
         echo 'error: Download failed! Please check your network or try again.'
         return 1
